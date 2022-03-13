@@ -205,5 +205,11 @@ if (isFull()) throw new NoSuchElementException("Heap is full");
 assertEquals(true, binaryHeap.isFull());
 ```
 
-. Use PIT to evaluate the test suite you have so far. Describe below the mutation score and the live mutants. Add new test cases or refactor the existing ones to achieve a high mutation score.
-![Code couverage](codeCOuverae.png)
+4. Use PIT to evaluate the test suite you have so far. Describe below the mutation score and the live mutants. Add new test cases or refactor the existing ones to achieve a high mutation score.
+
+Nous couvrons la majoutiré des lignes de code de la classe BinaryHeap 44/47. le reste des lignes c'est les initialisations des champs. 
+
+Ci-dessous une capture d'ecran. 
+
+![Code couverage](https://github.com/KarimOugueur/VV-ISTIC-TP3/blob/dev_karim/codeCOuverae.png)
+
