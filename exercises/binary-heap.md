@@ -208,6 +208,6 @@ assertEquals(true, binaryHeap.isFull());
 
 4. Use PIT to evaluate the test suite you have so far. Describe below the mutation score and the live mutants. Add new test cases or refactor the existing ones to achieve a high mutation score.
 
- - Nous couvrons la majourité des lignes de code de la classe BinaryHeap. le reste des lignes c'est les initialisations des champs. 
+ - Nous couvrons la majorité des lignes de code de la classe BinaryHeap. le reste des lignes c'est les initialisations des champs. 
  - Nous avons utilisé Jacoco pour mesurer le taux de code coverage. 
  - Pour visualiser le code coverage, rendez sur /code/tp3-heap/target/site/jacoco/index.html
