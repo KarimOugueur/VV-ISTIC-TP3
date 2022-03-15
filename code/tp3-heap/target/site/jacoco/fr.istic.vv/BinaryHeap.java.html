@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BinaryHeap.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tp3-heap</a> &gt; <a href="index.source.html" class="el_package">fr.istic.vv</a> &gt; <span class="el_source">BinaryHeap.java</span></div><h1>BinaryHeap.java</h1><pre class="source lang-java linenums">package fr.istic.vv;
+
+import java.util.Comparator;
+import java.util.NoSuchElementException;
+
+
+
+class BinaryHeap&lt;T&gt; {
+
+    private int heapSize;
+    private T[] heap;
+    private Comparator&lt;T&gt; comparator;
+
+<span class="nc" id="L14">    public BinaryHeap(Comparator&lt;T&gt; comparator) {</span>
+<span class="nc" id="L15">        this.comparator = comparator;</span>
+<span class="nc" id="L16">    }</span>
+
+    /**
+     * Constructor
+     **/
+<span class="fc" id="L21">    public BinaryHeap(Comparator&lt;T&gt; comparator, T[] heap) {</span>
+<span class="fc" id="L22">        heapSize = 0;</span>
+<span class="fc" id="L23">        this.comparator = comparator;</span>
+<span class="fc" id="L24">        this.heap = heap;</span>
+
+<span class="fc" id="L26">    }</span>
+
+    /**
+     * get minimum from HeapBinary
+     * @returns and removes the minimum object in the heap.
+     * If the heap is empty it throws a NotSuchElementException
+     */
+    public T pop() {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if(isEmpty()) throw new NoSuchElementException(&quot;Heap is empty&quot;);</span>
+
+<span class="fc" id="L36">        T minimum = this.heap[0];</span>
+<span class="fc" id="L37">        delete(0);</span>
+<span class="fc" id="L38">        return minimum;</span>
+    }
+
+    /**
+     *
+     * get the minimum object
+     * @returns the minimum object but it does not remove it from the BinaryHeap
+     */
+    public T peek() {
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if(isEmpty()) throw new NoSuchElementException(&quot;Heap is empty&quot;);</span>
+<span class="fc" id="L48">        return this.heap[0];</span>
+    }
+
+    /**
+     * adds an element to the BinaryHeap
+     * @param element
+     */
+    public void push(T element) {
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (isFull()) throw new NoSuchElementException(&quot;Heap is full&quot;);</span>
+<span class="fc" id="L57">        heap[heapSize++] = element;</span>
+<span class="fc" id="L58">        heapifyUp(heapSize - 1);</span>
+<span class="fc" id="L59">    }</span>
+
+    /**
+     *  Count the number of elements in the BinaryHeap
+     * @returns the number of elements in the BinaryHeap
+     */
+    public int count() {
+<span class="fc" id="L66">        return this.heap.length;</span>
+    }
+
+
+    /**
+     * Function heapifUp
+     *This function is used when we insert a new element to a heap.
+     * When inserting a new element, we add it at the bottom of the heap tree,
+     * and move up the tree while comparing to the current parent element
+     * and swapping if needed.
+     **/
+    private void heapifyUp(int childIndex) {
+
+<span class="fc" id="L79">        T tmp = heap[childIndex];</span>
+<span class="pc bpc" id="L80" title="1 of 4 branches missed.">        while (childIndex &gt; 0 &amp;&amp; (comparator.compare(tmp, heap[parent(childIndex)]) == -1)) {</span>
+<span class="fc" id="L81">            heap[childIndex] = heap[parent(childIndex)];</span>
+<span class="fc" id="L82">            childIndex = parent(childIndex);</span>
+        }
+<span class="fc" id="L84">        heap[childIndex] = tmp;</span>
+<span class="fc" id="L85">    }</span>
+
+    /**
+     * Function to remove element at an index
+     * Remove element and call HeapifyDown function
+     * @param index of element to remove
+     * @return element removed
+     */
+    public T delete(int index) {
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (isEmpty()) throw new NoSuchElementException(&quot;BinaryHeap is empty&quot;);</span>
+<span class="fc" id="L95">        T keyItem = heap[index];</span>
+<span class="fc" id="L96">        heap[index] = heap[heapSize - 1];</span>
+<span class="fc" id="L97">        heapSize--;</span>
+<span class="fc" id="L98">        heapifyDown(index);</span>
+<span class="fc" id="L99">        return keyItem;</span>
+    }
+
+    /**
+     * Function HeapifyDown
+     * This function is used when we remove the top element from a heap.
+     * Removal of an element is done by swapping the top element with the last element at the bottom of the tree,
+     * removing the last element, and then heapfying the new top element down to maintain the heap property.
+     * @param index
+     */
+    private void heapifyDown(int index)
+    {
+        int child;
+<span class="fc" id="L112">        T tmp = heap[index];</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        while (kthChild(index, 1) &lt; heapSize) {</span>
+<span class="fc" id="L114">            child = minimumChild(index);</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">            if (comparator.compare(heap[child],tmp)==-1)</span>
+<span class="fc" id="L116">                heap[index] = heap[child];</span>
+            else
+                break;
+<span class="fc" id="L119">            index = child;</span>
+        }
+<span class="fc" id="L121">        heap[index] = tmp;</span>
+<span class="fc" id="L122">    }</span>
+
+    /**
+     * Allows to get
+     * @param index
+     * @return
+     */
+    private int minimumChild(int index) {
+<span class="fc" id="L130">        int minchildIndex = kthChild(index, 1);</span>
+<span class="fc" id="L131">        int k = 2;</span>
+<span class="fc" id="L132">        int position = kthChild(index, k);</span>
+<span class="pc bpc" id="L133" title="1 of 4 branches missed.">        while ((k &lt;= 2) &amp;&amp; (position &lt; heapSize)) {</span>
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">            if (comparator.compare(heap[position],heap[minchildIndex])==-1)</span>
+<span class="nc" id="L135">                minchildIndex = position;</span>
+<span class="fc" id="L136">            position = kthChild(index, k++);</span>
+        }
+<span class="fc" id="L138">        return minchildIndex;</span>
+    }
+
+    /**
+     * Check if BinaryHeap is empty
+     * @return
+     */
+    public boolean isEmpty() {
+<span class="fc bfc" id="L146" title="All 2 branches covered.">        return heapSize == 0;</span>
+    }
+
+    /**
+     * check if binaryHeap is full
+     * @return Boolean
+     */
+    public boolean isFull() {
+<span class="fc bfc" id="L154" title="All 2 branches covered.">        return heapSize == heap.length;</span>
+    }
+
+    /**
+     * @param index
+     * @return index parent of index
+     */
+    private int parent(int index) {
+<span class="fc" id="L162">        return (index - 1) / 2;</span>
+    }
+
+    /**
+     * Function to get index of k th child of i
+     * @param index child
+     * @param k k=1 left child k=2 right child
+     * @return index of k th child of index
+     */
+    private int kthChild(int index, int k) {
+<span class="fc" id="L172">        return 2 * index + k;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

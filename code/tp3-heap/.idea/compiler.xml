@@ -6,8 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="tp3-heap" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="tp3-heap" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

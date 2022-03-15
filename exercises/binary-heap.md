@@ -196,6 +196,7 @@ d'un élément est éffectué en échangeant l'élément supérieur avec le dern
 
 3.  If you have in your code any predicate that uses more than two boolean operators check if the test cases written to far satisfy *Base Choice Coverage*. If needed add new test cases. Describe below how you evaluated the logic coverage and the new test cases you added.
 -  Avec nos tests nous couvrant 94% de la classe BinaryHeap. 
+-  Nous avons rajouté des tests pour tester les exceptions. 
 
 exemple pour cette condition if, nous avons ajouté un asserEquals qui vérifié si le BinaryHeap est plein 
 ```java
@@ -207,9 +208,6 @@ assertEquals(true, binaryHeap.isFull());
 
 4. Use PIT to evaluate the test suite you have so far. Describe below the mutation score and the live mutants. Add new test cases or refactor the existing ones to achieve a high mutation score.
 
-Nous couvrons la majoutiré des lignes de code de la classe BinaryHeap 44/47. le reste des lignes c'est les initialisations des champs. 
-
-Ci-dessous une capture d'ecran. 
-
-![Code couverage](https://github.com/KarimOugueur/VV-ISTIC-TP3/blob/dev_karim/codeCOuverae.png)
-
+ - Nous couvrons la majourité des lignes de code de la classe BinaryHeap. le reste des lignes c'est les initialisations des champs. 
+ - Nous avons utilisé Jacoco pour mesurer le taux de code coverage. 
+ - Pour visualiser le code coverage, rendez sur /code/tp3-heap/target/site/jacoco/index.html

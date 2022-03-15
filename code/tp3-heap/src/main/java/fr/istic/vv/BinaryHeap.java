@@ -54,8 +54,6 @@ class BinaryHeap<T> {
      */
     public void push(T element) {
         if (isFull()) throw new NoSuchElementException("Heap is full");
-
-        System.out.println(element);
         heap[heapSize++] = element;
         heapifyUp(heapSize - 1);
     }
