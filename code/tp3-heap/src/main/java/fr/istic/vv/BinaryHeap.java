@@ -11,10 +11,6 @@ class BinaryHeap<T> {
     private T[] heap;
     private Comparator<T> comparator;
 
-    public BinaryHeap(Comparator<T> comparator) {
-        this.comparator = comparator;
-    }
-
     /**
      * Constructor
      **/
@@ -31,11 +27,9 @@ class BinaryHeap<T> {
      * If the heap is empty it throws a NotSuchElementException
      */
     public T pop() {
-        if(isEmpty()) throw new NoSuchElementException("Heap is empty");
+        if(isEmpty()) {throw new NoSuchElementException("Heap is empty");}
 
-        T minimum = this.heap[0];
-        delete(0);
-        return minimum;
+        return delete(0);
     }
 
     /**
@@ -44,8 +38,8 @@ class BinaryHeap<T> {
      * @returns the minimum object but it does not remove it from the BinaryHeap
      */
     public T peek() {
-        if(isEmpty()) throw new NoSuchElementException("Heap is empty");
-        return this.heap[0];
+        if(isEmpty()) {throw new NoSuchElementException("Heap is empty");}
+        return heap[0];
     }
 
     /**
@@ -53,9 +47,8 @@ class BinaryHeap<T> {
      * @param element
      */
     public void push(T element) {
-        if (isFull()) throw new NoSuchElementException("Heap is full");
+        if (isFull()) {throw new NoSuchElementException("Heap is full");}
 
-        System.out.println(element);
         heap[heapSize++] = element;
         heapifyUp(heapSize - 1);
     }
@@ -68,7 +61,6 @@ class BinaryHeap<T> {
         return this.heap.length;
     }
 
-
     /**
      * Function heapifUp
      *This function is used when we insert a new element to a heap.
@@ -79,7 +71,7 @@ class BinaryHeap<T> {
     private void heapifyUp(int childIndex) {
 
         T tmp = heap[childIndex];
-        while (childIndex > 0 && (comparator.compare(tmp, heap[parent(childIndex)]) == -1)) {
+        while (childIndex > 0 && comparator.compare(tmp, heap[parent(childIndex)]) == -1) {
             heap[childIndex] = heap[parent(childIndex)];
             childIndex = parent(childIndex);
         }
@@ -93,7 +85,7 @@ class BinaryHeap<T> {
      * @return element removed
      */
     public T delete(int index) {
-        if (isEmpty()) throw new NoSuchElementException("BinaryHeap is empty");
+        if (isEmpty()) {throw new NoSuchElementException("BinaryHeap is empty");}
         T keyItem = heap[index];
         heap[index] = heap[heapSize - 1];
         heapSize--;
@@ -108,16 +100,16 @@ class BinaryHeap<T> {
      * removing the last element, and then heapfying the new top element down to maintain the heap property.
      * @param index
      */
-    private void heapifyDown(int index)
-    {
+    private void heapifyDown(int index) {
         int child;
         T tmp = heap[index];
         while (kthChild(index, 1) < heapSize) {
             child = minimumChild(index);
-            if (comparator.compare(heap[child],tmp)==-1)
+            if (comparator.compare(heap[child],tmp) <0) {
                 heap[index] = heap[child];
-            else
+            } else {
                 break;
+            }
             index = child;
         }
         heap[index] = tmp;
@@ -132,9 +124,10 @@ class BinaryHeap<T> {
         int minchildIndex = kthChild(index, 1);
         int k = 2;
         int position = kthChild(index, k);
-        while ((k <= 2) && (position < heapSize)) {
-            if (comparator.compare(heap[position],heap[minchildIndex])==-1)
+        while (k <= 2 && position < heapSize) {
+            if (comparator.compare(heap[position],heap[minchildIndex])==-1) {
                 minchildIndex = position;
+            }
             position = kthChild(index, k++);
         }
         return minchildIndex;

@@ -195,21 +195,58 @@ d'un élément est éffectué en échangeant l'élément supérieur avec le dern
 ```
 
 3.  If you have in your code any predicate that uses more than two boolean operators check if the test cases written to far satisfy *Base Choice Coverage*. If needed add new test cases. Describe below how you evaluated the logic coverage and the new test cases you added.
--  Avec nos tests nous couvrant 94% de la classe BinaryHeap. 
+- Tous les tests que nous avons faits n'ont pas d'opérateurs booléens multiples. Chaque assertion que nous
+  avons faites est indépendante des autres même si elle peut être liée.
 
-exemple pour cette condition if, nous avons ajouté un asserEquals qui vérifié si le BinaryHeap est plein 
-```java
-if (isFull()) throw new NoSuchElementException("Heap is full");
-```
-```java
-assertEquals(true, binaryHeap.isFull());
-```
 
 4. Use PIT to evaluate the test suite you have so far. Describe below the mutation score and the live mutants. Add new test cases or refactor the existing ones to achieve a high mutation score.
 
-Nous couvrons la majoutiré des lignes de code de la classe BinaryHeap 44/47. le reste des lignes c'est les initialisations des champs. 
+   - Nous avons lancé la commande suivant: mvn test-compile org.pitest:pitest-maven:mutationCoverage
+   - Le taux de code coverage est à 98% et le score de muation est à 66%. 
 
-Ci-dessous une capture d'ecran. 
+Nous avons rajouté des tests pour améliorer le taux de code coverage.  
 
-![Code couverage](https://github.com/KarimOugueur/VV-ISTIC-TP3/blob/dev_karim/codeCOuverae.png)
+```java
+        /**
+ * test push element in binaryheap full
+ */
+@Test
+public void testPushNotOKBinaryHeapIsFull(){
+        binaryHeap.push(4);
+        binaryHeap.push(3);
+        binaryHeap.push(2);
+        binaryHeap.push(1);
+        binaryHeap.push(8);
+        binaryHeap.push(11);
+        binaryHeap.push(19);
 
+        assertEquals(true, binaryHeap.isFull());
+        assertThrows(NoSuchElementException.class, () -> binaryHeap.push(5), "Heap is full");
+        }
+/**
+ * test method peek not ok
+ * peek element from the empty heap
+ */
+@Test
+public void testPeekNotOKHeapEmpty(){
+        assertThrows(NoSuchElementException.class, () -> binaryHeap.peek(), "Heap is empty");
+        }
+
+/**
+ * test push element in binaryheap full
+ */
+@Test
+public void testPushNotOKBinaryHeapIsFull(){
+        binaryHeap.push(4);
+        binaryHeap.push(3);
+        binaryHeap.push(2);
+        binaryHeap.push(1);
+        binaryHeap.push(8);
+        binaryHeap.push(11);
+        binaryHeap.push(19);
+
+        assertEquals(true, binaryHeap.isFull());
+        assertThrows(NoSuchElementException.class, () -> binaryHeap.push(5), "Heap is full");
+        }
+```
+Après l'ajout de ces tests nous sommes arrivé à 100% de taux de code coverage, mais malheuresment nous n'avons pas réussi à augmenter le taux de mutation. 
