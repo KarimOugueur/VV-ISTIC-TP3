@@ -143,7 +143,7 @@ avons faites est indépendante des autres même si elle peut être liée.
     mvn test-compile org.pitest:pitest-maven:mutationCoverage
 
 Notre score de couverture de mutation est de 83% ce qui relativement correct. Par exemple, nous avons
-beaucoup de mutant au niveau de ces lignes : 
+beaucoup de mutants au niveau de ces lignes : 
 
     return (month == 2 && isLeapYear(year) && day > 0 && day <= 29) || (day > 0 && day <= numberOfDaysInEachMonth[month - 1]);
 
