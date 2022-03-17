@@ -152,5 +152,12 @@ et
      return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 
 car il y a beaucoup de conditions et d'opérations booléennes. Cependant, elles sont nécessaires.
-Nous avons essayé de refactoré le code en vain --> Chaque modification entraîne une diminution du score
-ou un un nouveau bug.
+
+Afin d'améliorer le score de mutation nous avons ajouté 2 TU pour la méthode **isLeapYear()** :
+
+- **testIsLeapYearOK400()** 
+- **testIsLeapYearNOK100()**
+
+Cela a augmenté le score à 86%.
+
+

@@ -70,3 +70,4 @@ par d'autres développeurs.
 
 Nous avons un pourcentage de 79 pour la couverture de mutation. Les if dans chaque use case crée 3 mutants, ce qui est beaucoup.
 Nous avons essayé de modifier ces lignes de code mais chaque changement provoquait une diminution du pourcentage.
+De plus, nous avons ajouté des tests mais aucun n'a pu amélioré le pourcentage.

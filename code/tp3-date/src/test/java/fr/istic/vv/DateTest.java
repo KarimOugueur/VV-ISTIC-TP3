@@ -83,6 +83,18 @@ public class DateTest {
         assertFalse(new Date(20, 12, 2020).isLeapYear(2019));
     }
 
+    // Test isLeapYear OK : example 400
+    @Test
+    public void testIsLeapYearOK400() {
+        assertTrue(new Date(20, 12, 2020).isLeapYear(400));
+    }
+
+    // Test isLeapYear NOK : example 100
+    @Test
+    public void testIsLeapYearNOK100() {
+        assertFalse(new Date(20, 12, 2020).isLeapYear(100));
+    }
+
     // Test next date OK: example simple
     @Test
     public void testNextDateOKSimpleExample() {
